@@ -27,14 +27,14 @@ export interface LocationError {
 }
 
 export interface LocationState {
-  data: LocationData | null;
+  data: LocationData[] | null;
   loading: boolean;
   error: string;
 }
 
 interface GetLocationAction {
   type: typeof GET_LOCATIONS;
-  payload: LocationData;
+  payload: LocationData[];
 }
 
 export interface WeatherError {
