@@ -1,10 +1,12 @@
 export const GET_LOCATIONS = 'GET_LOCATIONS';
+export const GET_LOCATION_DETAIL = 'GET_LOCATION_DETAIL';
 export const GET_WEATHER = 'GET_WEATHER';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_ALERT = 'SET_ALERT';
 
 export interface LocationData {
+    key: string;
     title: string;
     woeid: number;
 }
@@ -37,6 +39,11 @@ interface GetLocationAction {
   payload: LocationData[];
 }
 
+interface GetLocationDetailAction {
+  type: typeof GET_LOCATION_DETAIL;
+  payload: WeatherData
+}
+
 export interface WeatherError {
     cod: string;
     message: string;
@@ -63,7 +70,7 @@ interface SetErrorAction {
 }
 
 export type WeatherAction = GetWeatherAction | SetLoadingAction | SetErrorAction;
-export type LocationAction = GetLocationAction | SetLoadingAction | SetErrorAction;
+export type LocationAction = GetLocationAction | GetLocationDetailAction | SetLoadingAction | SetErrorAction;
 
 export interface AlertAction {
     type: typeof SET_ALERT;

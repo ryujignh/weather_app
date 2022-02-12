@@ -13,7 +13,14 @@ const Weather: FC<WeatherProps> = ({data}) => {
         <div className="level" style={{alignItems: 'flex-start'}}></div>
         <div className="level-item has-text-centered">
           <div>
-            {/*<p className="heading">{data.weather[0].description}</p>*/}
+            <p>{data.title}</p>
+            <p>Today</p>
+            <p>{data.consolidated_weather.the_temp.toFixed(1)} C</p>
+            <p>{data.consolidated_weather.weather_state_name}</p>
+            <p>{data.consolidated_weather.weather_state_abbr}</p>
+            <p>Min: {Math.round(data.consolidated_weather.min_temp)} C</p>
+            <p>Max: {Math.round(data.consolidated_weather.max_temp)} C</p>
+            <p>{Math.round(data.consolidated_weather.wind_speed)} mph</p>
           </div>
         </div>
       </div>

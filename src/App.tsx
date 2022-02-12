@@ -3,14 +3,20 @@ import {useDispatch, useSelector} from "react-redux";
 import './App.css';
 
 import {RootState} from "./store";
-import Search from "./components/Search";
+import SearchBar from "./components/SearchBar";
 import Alert from './components/Alert'
 import Weather from "./components/Weather";
 import Location from "./components/Location";
 import {setAlert} from "./store/actions/alertActions";
 import {setError} from "./store/actions/weatherActions";
 import NoResult from "./components/NoResult";
+import {Layout, Row, Col, Spin} from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
+import LocationTable from "./components/LocationTable";
 
+const {Header, Footer, Sider, Content} = Layout;
+
+const spinIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -20,15 +26,32 @@ const App: FC = () => {
   const error = useSelector((state: RootState) => state.weather.error);
   const alertMsg = useSelector((state: RootState) => state.alert.message);
   return (
-    <div className="has-text-centered">
-      <Search title="Enter city name and press search button"/>
-      {/*{loading ? <h2 className="is-size-3 py-2">Loaing...</h2> : weatherData && <Weather data={weatherData}/>}*/}
-      {loading ? <h2 className="is-size-3 py-2">Loading...</h2> : ''}
-      {locationData ? <Location data={locationData}/> : <NoResult/> }
+    <Layout>
+      <Content>
 
-      {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))}/>}
-      {error && <Alert message={error} onClose={() => dispatch(setError())}/>}
-    </div>
+        <SearchBar title="How is the weather?"/>
+
+        <Row style={{backgroundColor: '#FFFFFF', minHeight: '100%', justifyContent: 'center'}}>
+          <Col span={12}>
+            <div className="result-container">
+              {loading ? <h2><Spin indicator={spinIcon}></Spin><p>Loading</p></h2> : ''}
+              {locationData ? <LocationTable data={locationData}/> : <h1>No results yet!</h1>}
+            </div>
+
+
+          </Col>
+
+        </Row>
+
+        {/*{loading ? <h2 className="is-size-3 py-2">Loaing...</h2> : weatherData && <Weather data={weatherData}/>}*/}
+
+        {/*{locationData ? <Location data={locationData}/> : <NoResult/> }*/}
+        {alertMsg && <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))}/>}
+        {error && <Alert message={error} onClose={() => dispatch(setError())}/>}
+      </Content>
+
+
+    </Layout>
   );
 }
 
