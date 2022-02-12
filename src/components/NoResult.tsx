@@ -1,15 +1,17 @@
 import React, {FC} from "react";
+import {Row, Col, Layout, Typography} from "antd";
+
+const {Content} = Layout;
+const {Title} = Typography;
 
 const NoResult: FC = () => {
   return (
-    <section className="section">
-      <div className="container">
-        <h2 className="title has-text-centered" style={{marginBottom: 50}}>No results yet!</h2>
-        <div className="level-item has-text-centered">
-          <p>Please use the search box above</p>
-        </div>
-      </div>
-    </section>
+    <Row justify="space-around" align="middle">
+      <Col style={{textAlign: 'center', height: '100%'}}>
+        <Title type="secondary" level={3} style={{marginBottom: '1.5rem'}}>No results yet!</Title>
+        <Title type="secondary" level={3}>Please use the search box above</Title>
+      </Col>
+    </Row>
   );
 }
 

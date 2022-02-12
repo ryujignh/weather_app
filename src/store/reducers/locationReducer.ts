@@ -15,6 +15,7 @@ export default (state = initialState, action: LocationAction): LocationState => 
         error: ''
       }
     case SET_LOADING:
+      console.log('locationReducer')
       return {
         ...state, //...state loads the initialState
         loading: true

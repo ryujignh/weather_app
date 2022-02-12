@@ -3,11 +3,22 @@
 .hero {
     min-height: 20rem;
     background-color: #F5C654;
+
 }
 
 .hero h1 {
     color: #FFFFFF;
     font-size: 2rem;
+}
+
+.hero .ant-btn-primary {
+    background: #525252;
+    border-color: #525252;
+}
+
+.hero .ant-btn-primary:hover {
+    background: #525252;
+    border-color: #525252;
 }
 
 .result-container {

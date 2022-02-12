@@ -2,10 +2,10 @@ import React, {FC, FormEvent, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import {getLocation, setLoading} from "../store/actions/locationActions";
-import {Row, Col, Input} from "antd";
-import {wait} from "@testing-library/user-event/dist/utils";
+import {Row, Col, Input, Typography} from "antd";
 
 const {Search} = Input;
+const {Title} = Typography;
 
 interface SearchProps {
   title: string;
@@ -22,13 +22,13 @@ const SearchBar: FC<SearchProps> = ({title}) => {
   const submitHandler = () => {
     dispatch(setLoading());
     dispatch(getLocation(city));
-    // setCity('');
+    setCity('');
   }
 
   return (
-    <Row className='hero' style={{justifyContent: 'center'}}>
+    <Row justify="space-around" align="middle" className='hero'>
       <Col span={8}>
-        <h1 className="title">{title}</h1>
+        <Title level={2} style={{color: '#FFFFFF', textAlign: 'center', marginBottom: '1.5rem'}}>{title}</Title>
         <Search
           placeholder="Search by city name"
           allowClear

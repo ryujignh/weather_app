@@ -2,6 +2,7 @@ export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const GET_LOCATION_DETAIL = 'GET_LOCATION_DETAIL';
 export const GET_WEATHER = 'GET_WEATHER';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_WEATHER_LOADING = 'SET_WEATHER_LOADING';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_ALERT = 'SET_ALERT';
 
@@ -13,14 +14,14 @@ export interface LocationData {
 
 export interface WeatherData {
     title: string;
-    consolidated_weather: {
+    consolidated_weather: [{
       weather_state_name: string;
       weather_state_abbr: string;
       min_temp: number,
       max_temp: number,
       the_temp: number,
       wind_speed: number,
-    }
+    }]
 }
 
 export interface LocationError {
@@ -39,11 +40,6 @@ interface GetLocationAction {
   payload: LocationData[];
 }
 
-interface GetLocationDetailAction {
-  type: typeof GET_LOCATION_DETAIL;
-  payload: WeatherData
-}
-
 export interface WeatherError {
     cod: string;
     message: string;
@@ -51,7 +47,6 @@ export interface WeatherError {
 
 export interface WeatherState {
     data: WeatherData | null;
-    loading: boolean;
     error: string;
 }
 
@@ -70,7 +65,7 @@ interface SetErrorAction {
 }
 
 export type WeatherAction = GetWeatherAction | SetLoadingAction | SetErrorAction;
-export type LocationAction = GetLocationAction | GetLocationDetailAction | SetLoadingAction | SetErrorAction;
+export type LocationAction = GetLocationAction | SetLoadingAction | SetErrorAction;
 
 export interface AlertAction {
     type: typeof SET_ALERT;
