@@ -1,18 +1,18 @@
 import React, {FC} from "react";
-import {Row, Col, Spin, Typography, Space} from "antd";
+import {Row, Col, Spin, Typography} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 
 const {Title} = Typography;
 const spinIcon = <LoadingOutlined style={{fontSize: 50}} spin/>;
 
-const Alert: FC = () => {
+const Spinner: FC = () => {
   return (
-    // <Row justify="space-around" align="middle" style={{height: '100%'}}>
-    //   <Col>
+    <Row justify="space-around" align="middle">
+      <Col>
         <Title level={3}><Spin indicator={spinIcon}/><p>Loading</p></Title>
-      // </Col>
-    // </Row>
+      </Col>
+    </Row>
   );
 }
 
-export default Alert
+export default Spinner

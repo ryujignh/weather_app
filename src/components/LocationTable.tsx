@@ -1,11 +1,12 @@
 import React, {FC, useState} from "react";
 import {LocationData} from "../store/types";
-import {Table, Modal, Spin, Row, Col} from "antd";
-import {getWeather} from "../store/actions/weatherActions";
+import {Table, Modal, Row, Col, Button} from "antd";
+import {getWeather, setLoading} from "../store/actions/weatherActions";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store";
 import {MouseEvent} from "react";
 import Weather from "./Weather";
+import Spinner from "./Spinner";
 
 interface LocationProps {
   data: LocationData[];
@@ -16,6 +17,7 @@ const LocationTable: FC<LocationProps> = ({data}) => {
   const dispatch = useDispatch();
 
   const weatherData = useSelector((state: RootState) => state.weather.data);
+  const loadingWeatherData = useSelector((state: RootState) => state.weather.loadingWeather);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -30,6 +32,7 @@ const LocationTable: FC<LocationProps> = ({data}) => {
   };
 
   const clickHandler = (woeid: number) => {
+    dispatch(setLoading());
     dispatch(getWeather(woeid))
     showModal()
   }
@@ -42,18 +45,18 @@ const LocationTable: FC<LocationProps> = ({data}) => {
     {
       dataIndex: "woeid",
       key: "woeid",
-      render: (woeid: number) => <a onClick={(e: MouseEvent) => {
+      render: (woeid: number) => <Button type="link" onClick={(e: MouseEvent) => {
+        e.preventDefault()
         clickHandler(woeid)
-      }}>See Details...</a>
+      }}>See Details...</Button>
     }
   ]
   return (
-    <Row style={{width: '100%'}}>
+    <Row justify="space-around" align="middle" style={{width: '100%'}}>
       <Col style={{width: '100%'}}>
         <Table dataSource={data} columns={columns} style={{width: '100%'}}/>
-        <Modal title={weatherData ? weatherData.title : ''} visible={isModalVisible} onOk={handleOk}
-               onCancel={handleCancel}>
-          {weatherData ? <Weather data={weatherData}/> : ''}
+        <Modal title={loadingWeatherData ? '' : weatherData ? weatherData.title : ''} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          {loadingWeatherData ? <Spinner/> : weatherData && <Weather data={weatherData}/>}
         </Modal>
       </Col>
     </Row>

@@ -1,32 +1,34 @@
-import {GET_LOCATIONS, SET_ERROR, SET_LOADING, LocationAction, LocationState} from "../types"
+import {GET_LOCATIONS, SET_ERROR, SET_LOADING_LOCATIONS, LocationAction, LocationState} from "../types"
 
 const initialState: LocationState = {
   data: null,
-  loading: false,
+  loadingLocations: false,
   error: ''
 }
 
-export default (state = initialState, action: LocationAction): LocationState => {
+const locationReducer = (state = initialState, action: LocationAction): LocationState => {
   switch (action.type) {
     case GET_LOCATIONS:
+      console.log('GET_LOCATIONS')
       return {
         data: action.payload,
-        loading: false,
+        loadingLocations: false,
         error: ''
       }
-    case SET_LOADING:
+    case SET_LOADING_LOCATIONS:
       console.log('locationReducer')
       return {
         ...state, //...state loads the initialState
-        loading: true
+        loadingLocations: true
       }
     case SET_ERROR:
       return {
         ...state, //...state loads the initialState
         error: action.payload,
-        loading: true
+        loadingLocations: true
       }
     default:
       return state;
   }
 }
+export default locationReducer;
