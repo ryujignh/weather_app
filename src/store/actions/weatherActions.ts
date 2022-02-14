@@ -6,8 +6,8 @@ export const getWeather = (woeid: number): ThunkAction<void, RootState, null, We
   return async dispatch => {
     let res;
     try {
-      // Using https://cors-anywhere.herokuapp.com as a proxy to request to metaweather.com api to avoid getting CORS error
-      res = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`);
+      // Using https://sheltered-eyrie-68708.herokuapp.com as a proxy to request to metaweather.com api to avoid getting CORS error
+      res = await fetch(`https://sheltered-eyrie-68708.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`);
 
       const resData: WeatherData = await res.json();
       if (!res.ok) {
