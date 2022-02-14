@@ -52,10 +52,14 @@ interface GetWeatherAction {
   payload: WeatherData;
 }
 
-interface SetErrorAction {
-  type: typeof SET_ERROR;
-  payload: string;
+export interface ErrorAction {
+  type: typeof SET_ERROR,
+  payload: string,
 }
 
-export type WeatherAction = GetWeatherAction | SetLoadingWeatherAction | SetErrorAction;
-export type LocationAction = GetLocationAction | SetLoadingLocationAction | SetErrorAction;
+export interface ErrorState {
+  message: string;
+}
+
+export type WeatherAction = GetWeatherAction | SetLoadingWeatherAction | ErrorAction;
+export type LocationAction = GetLocationAction | SetLoadingLocationAction | ErrorAction;

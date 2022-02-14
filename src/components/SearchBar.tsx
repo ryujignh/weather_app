@@ -4,6 +4,8 @@ import {useDispatch} from "react-redux";
 import {getLocation, setLoading} from "../store/actions/locationActions";
 import {Row, Col, Input, Typography} from "antd";
 
+import {setError} from "../store/actions/errorActions";
+
 const {Search} = Input;
 const {Title} = Typography;
 
@@ -20,6 +22,9 @@ const SearchBar: FC<SearchProps> = ({title}) => {
   }
 
   const submitHandler = () => {
+    if (city.trim() === '') {
+      return dispatch(setError('Please input the city name!'));
+    }
     dispatch(setLoading());
     dispatch(getLocation(city));
     setCity('');
@@ -34,6 +39,7 @@ const SearchBar: FC<SearchProps> = ({title}) => {
           allowClear
           enterButton="Go"
           size="large"
+          value={city}
           onChange={changeHandler}
           onSearch={submitHandler}
         >

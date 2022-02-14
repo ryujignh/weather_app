@@ -9,14 +9,12 @@ const initialState: WeatherState = {
 const weatherReducer = (state = initialState, action: WeatherAction): WeatherState => {
   switch (action.type) {
     case GET_WEATHER:
-      console.log('GET_WEATHER')
       return {
         data: action.payload,
         loadingWeather: false,
         error: ''
       }
     case SET_LOADING_WEATHER:
-      console.log('weatherReducer')
       return {
         ...state, //...state loads the initialState
         loadingWeather: true
