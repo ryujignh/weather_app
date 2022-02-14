@@ -24,10 +24,6 @@ const LocationTable: FC<LocationProps> = ({data}) => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -56,12 +52,12 @@ const LocationTable: FC<LocationProps> = ({data}) => {
   ]
 
 
-
   return (
     <Row justify="space-around" align="top" style={{width: '100%'}}>
       <Col style={{width: '100%'}}>
-        <Table dataSource={data} columns={columns} style={{width: '100%'}}/>
-        <Modal title={loadingWeatherData ? '' : weatherData ? weatherData.title : ''} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Table rowKey="title" dataSource={data} columns={columns} style={{width: '100%'}}/>
+        <Modal title={loadingWeatherData ? '' : weatherData ? weatherData.title : ''} visible={isModalVisible}
+               onCancel={handleCancel} footer={null}>
           {error && <Alert type="error" message={error} onClose={() => dispatch(setError(''))}/>}
           {loadingWeatherData ? <Spinner/> : weatherData && <Weather data={weatherData}/>}
         </Modal>
