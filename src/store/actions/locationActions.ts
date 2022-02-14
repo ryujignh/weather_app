@@ -12,12 +12,8 @@ export const getLocation = (city: string): ThunkAction<void, RootState, null, Lo
   return async dispatch => {
     let res;
     try {
-      if (process.env.NODE_ENV === 'production') {
-        res = await fetch(`https://www.metaweather.com/api/location/search/?query=${city}`);
-      } else {
-        // Using https://cors-anywhere.herokuapp.com as a proxy to request to metaweather.com api to avoid getting CORS error
-        res = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`);
-      }
+      // Using https://cors-anywhere.herokuapp.com as a proxy to request to metaweather.com api to avoid getting CORS error
+      res = await fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${city}`);
 
       if (!res.ok) {
         const resData: any = await res.json();
